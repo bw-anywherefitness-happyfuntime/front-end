@@ -13,7 +13,7 @@ export default function Login(props) {
     const onSubmit = evt => {
         evt.preventDefault()
         console.log("submit called from Login.js");
-        // submit();
+        submit();
     }
     const onChange = evt => {
         // console.log("change detected in Login.js")
@@ -41,6 +41,10 @@ export default function Login(props) {
                         type="password"
                     />
                 </label>
+                <div className="errors">
+                    <div>{errors.username}</div>
+                    <div>{errors.password}</div>
+                </div>
                 <div className="form-group submit">
                     <button id='submitBtn' disabled={disabled}>submit</button>
                 </div>

@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom';
+import * as yup from 'yup';
+import loginSchema from './components/validation/loginSchema';
 
 import './App.css'
 
@@ -20,17 +22,18 @@ const initialLoginErrors = {
   username: "",
   password: "",
 }
-const loginDisabled = true;
+const initialLoginDisabled = true;
 
 function App() {
   //LOGIN FORM STATE
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
+  const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
 
   //LOGIN FORM EVENT HANDLERS
   const inputChange = (name, value) => {
     console.log('login input change: ', name, value); //PLACEHOLDER
-    // validate(name, value);
+    validateLogin(name, value);
     setLoginValues({...loginValues, [name]:value});
   }
   const loginSubmit = () => {
@@ -45,6 +48,16 @@ function App() {
     // // console.log(newUser);
     // postNewUser(newUser);
   }
+  const validateLogin = (name, value) => {
+    yup.reach(loginSchema, name)
+      .validate(value)
+      .then(() => setLoginErrors({ ...loginErrors, [name]:''}))
+      .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
+  }
+  //SIDE EFFECTS
+  useEffect(() => {
+    loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
+}, [loginValues]);
 
   return (
     <div className="App">
