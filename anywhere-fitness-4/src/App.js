@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import './App.css'
@@ -11,7 +11,23 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 
+//INITIAL FORM STATES
+const initialLoginValues = {
+  username: "",
+  password: "",
+}
+
 function App() {
+  //LOGIN FORM STATE
+  const [loginValues, setLoginValues] = useState(initialLoginValues)
+
+  //LOGIN FORM EVENT HANDLERS
+  const inputChange = (name, value) => {
+    console.log('login input change: ', name, value); //PLACEHOLDER
+    // validate(name, value);
+    setLoginValues({...loginValues, [name]:value});
+  }
+
   return (
     <div className="App">
       <Header />
@@ -25,7 +41,10 @@ function App() {
             <Bookings />
           </Route>
           <Route path='/login'>
-            <Login />
+            <Login
+              values={loginValues}
+              change={inputChange}
+              />
           </Route>
           <Route path='/logout'>
             <Logout />

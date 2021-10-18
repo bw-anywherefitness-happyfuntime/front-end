@@ -1,0 +1,10 @@
+div.login {
+    border: 1px solid red;
+    width: 70%;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
