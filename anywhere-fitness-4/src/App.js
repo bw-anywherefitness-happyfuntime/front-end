@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
 import loginSchema from './components/validation/loginSchema';
+import signupSchema from './components/validation/signupSchema';
 
 import './App.css'
 
@@ -22,7 +23,20 @@ const initialLoginErrors = {
   username: "",
   password: "",
 }
+const initialSignup = {
+  username: "",
+  password: "",
+  secret: "",
+  role: "client", //'instructor' or 'client'
+}
+const initialSignupErrors = {
+  username: "",
+  password: "",
+  secret: "",
+  role: "", //'instructor' or 'client'
+}
 const initialLoginDisabled = true;
+const initSignupRoleDisabled = true;
 
 function App() {
   //LOGIN FORM STATE
@@ -30,32 +44,45 @@ function App() {
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
   const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
 
-  //LOGIN FORM EVENT HANDLERS
-  const inputChange = (name, value) => {
+  const [signupValues, setSignupValues] = useState(initialSignup)
+  const [signupErrors, setSignupErrors] = useState(initialSignupErrors)
+  const [signupRoleDisabled, setSignupRoleDisabled] = useState(initSignupRoleDisabled);
+
+  //EVENT HANDLERS
+  const loginInputChange = (name, value) => {
     console.log('login input change: ', name, value); //PLACEHOLDER
     validateLogin(name, value);
     setLoginValues({...loginValues, [name]:value});
   }
-  const loginSubmit = () => {
-    console.log("form submit"); //PLACEHOLDER
-    // const newUser = { //NEED TO CHANGE THESE KEYS TO MATCH API????
-    //   first_name: formValues.first_name.trim(), //TRIM ERRORING OUT HERE
-    //   last_name: formValues.last_name.trim(),
-    //   email: formValues.email.trim(),
-    //   pwd: formValues.pwd.trim(),
-    //   tos: formValues.tos,
-    // }
-    // // console.log(newUser);
-    // postNewUser(newUser);
+  const signupInputChange = (name, value) => {
+    console.log('signup input change: ', name, value); //PLACEHOLDER
+    validateSignup(name, value);
+    setSignupValues({...signupValues, [name]:value});
   }
+
+  const loginSubmit = () => {
+    console.log("login submit");//placeholder until we sort out auth stuff
+  }
+  const signupSubmit = () => {
+    console.log("signup submit");//placeholder until we sort out auth stuff
+  }
+
   const validateLogin = (name, value) => {
     yup.reach(loginSchema, name)
       .validate(value)
       .then(() => setLoginErrors({ ...loginErrors, [name]:''}))
       .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
   }
+  const validateSignup = (name, value) => {
+    yup.reach(signupSchema, name)
+      .validate(value)
+      .then(() => setSignupErrors({ ...signupErrors, [name]:''}))
+      .catch(err => setSignupErrors({ ...signupErrors, [name]: err.errors[0] }))
+  }
+
   //SIDE EFFECTS
-  useEffect(() => {
+  // - if the form is valid, then enable submit button
+  useEffect(() => { 
     loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
 }, [loginValues]);
 
@@ -74,7 +101,7 @@ function App() {
           <Route path='/login'>
             <Login
               values={loginValues}
-              change={inputChange}
+              change={loginInputChange}
               disabled={loginDisabled}
               submit={loginSubmit}
               errors={loginErrors}
@@ -84,7 +111,13 @@ function App() {
             <Logout />
           </Route>
           <Route path='/signup'>
-            <Signup />
+            <Signup 
+              values={signupValues}
+              change={signupInputChange}
+              role_disabled={signupRoleDisabled}
+              submit={signupSubmit}
+              errors={signupErrors}
+            />
           </Route>
         </Switch>
       </main>
