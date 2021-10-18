@@ -29,11 +29,13 @@ export default function Classes(props) {
         change(name, valueToUse);
     }
 
+    // Form Submit
     const submit = (evt) => {
         evt.preventDefault();
         post(formValues);
     }
 
+    // Delete Class
     function deleteClass(id) {        
         axios.delete(`https://bw-fitness-4.herokuapp.com/api/classes/${id}`)
             .then(res => {
@@ -51,10 +53,18 @@ export default function Classes(props) {
             .catch(err => console.log(err))
     }
 
+    // Toggle Form
+    function toggleForm(evt) {
+        const form = document.querySelector('.form-container');
+        form.classList.remove('hide');
+        evt.target.classList.add('hide');
+    }
+
 
 
     // EFFECTS
-    useEffect(getClasses, [classes]);
+    useEffect(getClasses, []);
+    useEffect(getClasses, [classes])
 
     // HELPER FUNCTIONS
     function change(name, value) {
@@ -74,17 +84,21 @@ export default function Classes(props) {
         }
 
         axios.post('https://bw-fitness-4.herokuapp.com/api/classes', classToAdd)
-            .then(res => setClasses([res.data, ...classes]))
+            .then(res => {
+                setClasses([...classes, res.data])
+                document.querySelector('.form-container').classList.add('hide');
+                document.querySelector('#newClassBtn').classList.remove('hide');
+            })
             .catch(err => console.log(err))
             .finally(() => setFormValues(initFormValues))
     }
 
     return (
-        <div>
+        <div className='classes'>
             <div className='controls'>
-                <button onClick={() => {}}>New Class</button>
+                <button onClick={toggleForm} id='newClassBtn'>New Class</button>
             </div>
-            <div className='form-container'>
+            <div className='form-container hide'>
                 <form onSubmit={submit}>
                     <div className='form-text'>
 
@@ -115,20 +129,21 @@ export default function Classes(props) {
                             />
                         </label>
 
-                        <label>Date
-                            <input 
-                                type='date'
-                                name='class_date'
-                                value={formValues.class_date}
-                                onChange={onChange}
-                            />
-                        </label>
-
                         <label>Time
                             <input 
                                 type='text'
                                 name='class_time'
                                 value={formValues.class_time}
+                                onChange={onChange}
+                            />
+                        </label>
+                    </div>
+                    <div className='form-text'>
+                        <label>Date
+                            <input 
+                                type='date'
+                                name='class_date'
+                                value={formValues.class_date}
                                 onChange={onChange}
                             />
                         </label>

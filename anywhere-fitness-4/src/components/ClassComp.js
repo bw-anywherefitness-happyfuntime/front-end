@@ -10,6 +10,7 @@ export default function Class(props) {
         deleteClass(classData.class_id);
     }
 
+
     return (
         <div className='card'>
             <div className='class-header'>
