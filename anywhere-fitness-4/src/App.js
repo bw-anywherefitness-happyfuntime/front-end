@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import loginSchema from './components/validation/loginSchema';
 
 import './App.css'
-
+import PrivateRoute from './components/PrivateRoute'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Classes from './components/Classes'
