@@ -1,0 +1,8 @@
+.navigations {
+    display: flex;
+}
+
+.navigations div {
+    display: flex;
+    padding: 10px;
+}
