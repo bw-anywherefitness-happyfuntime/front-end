@@ -17,12 +17,12 @@ export default function Class(props) {
             </div>
             <div className='contents'>
                 <p>Where: {classData.class_location}</p>
-                <p>Length: {classData.class_duration}</p>
-                <p>Intensity: {classData.class_intensity}/10</p>
+                <p>Duration: {classData.class_duration}</p>
+                <p>Intensity: {classData.intensity_level}/10</p>
             </div>
             <div className='buttons'>
                 <button>Edit</button>
-                <button oncClick={deleteClass}>Delete</button>
+                <button onClick={deleteClass}>Delete</button>
             </div>
         </div>
     )
