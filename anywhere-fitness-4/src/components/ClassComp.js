@@ -1,12 +1,13 @@
+import axios from "axios";
 import React from "react";
 import './styles/ClassComp.css';
 
 
 export default function Class(props) {
-    const { classData } = props;
-
-    function deleteClass() {
-
+    const { classData, deleteClass } = props;
+    
+    function deleteFunc() {
+        deleteClass(classData.class_id);
     }
 
     return (
@@ -22,7 +23,7 @@ export default function Class(props) {
             </div>
             <div className='buttons'>
                 <button>Edit</button>
-                <button onClick={deleteClass}>Delete</button>
+                <button onClick={deleteFunc}>Delete</button>
             </div>
         </div>
     )

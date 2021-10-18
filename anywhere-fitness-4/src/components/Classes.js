@@ -34,11 +34,18 @@ export default function Classes(props) {
         post(formValues);
     }
 
+    function deleteClass(id) {        
+        axios.delete(`https://bw-fitness-4.herokuapp.com/api/classes/${id}`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => console.log(err))
+    }
+
     // Fetch classes from API
     function getClasses() {
         axios.get('https://bw-fitness-4.herokuapp.com/api/classes')
             .then(res => {
-                console.log(res);
                 setClasses(res.data);
             })
             .catch(err => console.log(err))
@@ -47,7 +54,7 @@ export default function Classes(props) {
 
 
     // EFFECTS
-    useEffect(getClasses, []);
+    useEffect(getClasses, [classes]);
 
     // HELPER FUNCTIONS
     function change(name, value) {
@@ -70,8 +77,6 @@ export default function Classes(props) {
             .then(res => setClasses([res.data, ...classes]))
             .catch(err => console.log(err))
             .finally(() => setFormValues(initFormValues))
-
-        console.log(classToAdd);
     }
 
     return (
@@ -141,7 +146,7 @@ export default function Classes(props) {
                 </form>
             </div>
             <div className='classList-container'>
-                {classes.map((classData, idx) => <ClassComp classData={classData} key={idx}/>)}
+                {classes.map((classData, idx) => <ClassComp classData={classData} deleteClass={deleteClass} key={idx}/>)}
             </div>
         </div>
     )
