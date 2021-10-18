@@ -11,14 +11,15 @@ export default function Class(props) {
                 <h2>Class: {classData.class_type}</h2>
                 <h3>{classData.class_date} @ {classData.class_time}</h3>
             </div>
-            <div>
+            <div className='contents'>
                 <p>Where: {classData.class_location}</p>
                 <p>Length: {classData.class_duration}</p>
                 <p>Intensity: {classData.class_intensity}/10</p>
             </div>
-
-            <button>Edit</button>
-            <button>Delete</button>
+            <div className='buttons'>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
     )
 }
