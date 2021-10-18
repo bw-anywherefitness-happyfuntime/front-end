@@ -16,9 +16,7 @@ export default function Login(props) {
         submit();
     }
     const onChange = evt => {
-        // console.log("change detected in Login.js")
         const { name, value } = evt.target;
-        // const valueToUse = type === "checkbox" ? checked : value;
         change(name, value);
     }
 
@@ -52,7 +50,3 @@ export default function Login(props) {
         </div>
     )
 }
-
-// LOG IN FORM
-//username
-//password
