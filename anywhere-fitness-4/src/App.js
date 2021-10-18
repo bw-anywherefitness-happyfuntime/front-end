@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
 import loginSchema from './components/validation/loginSchema';
-
+import { axiosWithAuth } from './helpers/axiosWithAuth';
 import './App.css'
 import PrivateRoute from './components/PrivateRoute'
 import Header from './components/Header'
@@ -47,6 +47,10 @@ function App() {
     // }
     // // console.log(newUser);
     // postNewUser(newUser);
+    axiosWithAuth()
+    .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
+    .then(res=> console.log(res))
+    .catch(err=> console.log( err.response.data.message ))
   }
   const validateLogin = (name, value) => {
     yup.reach(loginSchema, name)
