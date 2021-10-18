@@ -1,32 +1,31 @@
 import * as yup from 'yup';
 
 const classSchema = yup.object().shape({
-    type: yup
+    class_type: yup
         .string()
         .trim()
         .required('Please provide the class "Type" input field.')
         .min(2, 'Type must be at least 2 characters.'),
-    location: yup
+    class_location: yup
         .string
         .trim()
         .required('Please provide class location.'),
-    duration: yup
+    class_duration: yup
         .string()
         .trim()
         .required('Duration field empty.'),
-    date: yup
+    class_date: yup
         .string()
         .trim()
         .required('Date field empty.'),
-    time: yup
+    class_time: yup
         .string()
         .trim()
         .required('Time field is empty'),
-    intesity: yup
-        .number()
+    class_intesity: yup
+        .string()
         .trim()
         .required('Intesity field is empty.')
-        .max(10, 'Intensity cannot be more than 10.')
 });
 
 export default formSchema;

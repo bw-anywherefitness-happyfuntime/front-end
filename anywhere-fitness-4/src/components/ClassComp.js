@@ -5,6 +5,10 @@ import './styles/ClassComp.css';
 export default function Class(props) {
     const { classData } = props;
 
+    function deleteClass() {
+
+    }
+
     return (
         <div className='card'>
             <div className='class-header'>
@@ -18,7 +22,7 @@ export default function Class(props) {
             </div>
             <div className='buttons'>
                 <button>Edit</button>
-                <button>Delete</button>
+                <button oncClick={deleteClass}>Delete</button>
             </div>
         </div>
     )
