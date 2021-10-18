@@ -4,10 +4,14 @@ import './styles/ClassComp.css';
 
 
 export default function Class(props) {
-    const { classData, deleteClass } = props;
+    const { classData, deleteClass, editClass } = props;
     
     function deleteFunc() {
         deleteClass(classData.class_id);
+    }
+
+    function editFunc() {
+        editClass(classData.class_id);
     }
 
 
@@ -23,7 +27,7 @@ export default function Class(props) {
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
             <div className='buttons'>
-                <button>Edit</button>
+                <button onClick={editFunc}>Edit</button>
                 <button onClick={deleteFunc}>Delete</button>
             </div>
         </div>

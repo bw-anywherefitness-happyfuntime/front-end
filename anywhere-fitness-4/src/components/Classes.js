@@ -29,12 +29,6 @@ export default function Classes(props) {
         change(name, valueToUse);
     }
 
-    // Form Submit
-    const submit = (evt) => {
-        evt.preventDefault();
-        post(formValues);
-    }
-
     // Delete Class
     function deleteClass(id) {        
         axios.delete(`https://bw-fitness-4.herokuapp.com/api/classes/${id}`)
@@ -60,19 +54,7 @@ export default function Classes(props) {
         evt.target.classList.add('hide');
     }
 
-
-
-    // EFFECTS
-    useEffect(getClasses, []);
-    useEffect(getClasses, [classes])
-
-    // HELPER FUNCTIONS
-    function change(name, value) {
-        setFormValues({
-          ...formValues,
-          [name]: value
-        })
-    }
+    // Post New Class
     function post(values) {
         const classToAdd = {
             class_type: values.class_type,
@@ -91,6 +73,32 @@ export default function Classes(props) {
             })
             .catch(err => console.log(err))
             .finally(() => setFormValues(initFormValues))
+    }
+
+    function editClass(id) {
+        const toEdit = classes.filter(item => item.class_id === id);
+        document.querySelector('.form-container').classList.remove('hide');
+        document.querySelector('#newClassBtn').classList.add('hide');
+    }
+
+
+
+    // EFFECTS
+    useEffect(getClasses, []);
+    useEffect(getClasses, [classes])
+
+    // HELPER FUNCTIONS
+    function change(name, value) {
+        setFormValues({
+          ...formValues,
+          [name]: value
+        })
+    }
+
+    // Form Submit
+    const submit = (evt) => {
+        evt.preventDefault();
+        post(formValues);
     }
 
     return (
@@ -161,7 +169,11 @@ export default function Classes(props) {
                 </form>
             </div>
             <div className='classList-container'>
-                {classes.map((classData, idx) => <ClassComp classData={classData} deleteClass={deleteClass} key={idx}/>)}
+                {classes.map(classData => <ClassComp
+                                                    classData={classData}
+                                                    deleteClass={deleteClass}
+                                                    editClass={editClass}
+                                                    key={classData.class_id}/>)}
             </div>
         </div>
     )
