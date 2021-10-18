@@ -1,8 +1,13 @@
 import React from 'react'
+import ClassComp from './ClassComp.js'
 
-export default function Classes() {
+export default function Classes(props) {
+    const { classes } = props;
+
     return (
-        <div>classes</div>
+        <div>
+            {classes.map(classData => <ClassComp classData={classData} />)}
+        </div>
     )
 }
 
