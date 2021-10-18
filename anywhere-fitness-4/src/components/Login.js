@@ -41,6 +41,9 @@ export default function Login(props) {
                         type="password"
                     />
                 </label>
+                <div className="form-group submit">
+                    <button id='submitBtn' disabled={disabled}>submit</button>
+                </div>
             </form>
         </div>
     )

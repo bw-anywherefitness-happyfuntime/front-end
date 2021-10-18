@@ -16,16 +16,34 @@ const initialLoginValues = {
   username: "",
   password: "",
 }
+const initialLoginErrors = {
+  username: "",
+  password: "",
+}
+const loginDisabled = true;
 
 function App() {
   //LOGIN FORM STATE
   const [loginValues, setLoginValues] = useState(initialLoginValues)
+  const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
 
   //LOGIN FORM EVENT HANDLERS
   const inputChange = (name, value) => {
     console.log('login input change: ', name, value); //PLACEHOLDER
     // validate(name, value);
     setLoginValues({...loginValues, [name]:value});
+  }
+  const loginSubmit = () => {
+    console.log("form submit"); //PLACEHOLDER
+    // const newUser = { //NEED TO CHANGE THESE KEYS TO MATCH API????
+    //   first_name: formValues.first_name.trim(), //TRIM ERRORING OUT HERE
+    //   last_name: formValues.last_name.trim(),
+    //   email: formValues.email.trim(),
+    //   pwd: formValues.pwd.trim(),
+    //   tos: formValues.tos,
+    // }
+    // // console.log(newUser);
+    // postNewUser(newUser);
   }
 
   return (
@@ -44,6 +62,9 @@ function App() {
             <Login
               values={loginValues}
               change={inputChange}
+              disabled={loginDisabled}
+              submit={loginSubmit}
+              errors={loginErrors}
               />
           </Route>
           <Route path='/logout'>
