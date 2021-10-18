@@ -1,0 +1,14 @@
+.card {
+    border: 3px solid black;
+    flex-basis: 25%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 2%;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.class-header {
+    background-color: aqua;
+    width: 100%;
+}

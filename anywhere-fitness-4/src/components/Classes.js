@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ClassComp from './ClassComp.js'
+import axios from 'axios'
+import './styles/Classes.css'
 
 export default function Classes(props) {
-    const { classes } = props;
+    const [classes, setClasses] = useState([])
+
+    function getClasses() {
+        axios.get('https://bw-fitness-4.herokuapp.com/api/classes')
+            .then(res => {
+                console.log(res);
+                setClasses(res.data);
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(getClasses, []);
 
     return (
         <div>
@@ -10,7 +23,7 @@ export default function Classes(props) {
                 <button>New Class</button>
             </div>
             <div className='classList-container'>
-                {classes.map(classData => <ClassComp classData={classData} />)}
+                {classes.map(classData => <ClassComp classData={classData}/>)}
             </div>
         </div>
     )
