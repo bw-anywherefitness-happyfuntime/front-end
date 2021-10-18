@@ -6,7 +6,12 @@ export default function Classes(props) {
 
     return (
         <div>
-            {classes.map(classData => <ClassComp classData={classData} />)}
+            <div className='controls'>
+                <button>New Class</button>
+            </div>
+            <div className='classList-container'>
+                {classes.map(classData => <ClassComp classData={classData} />)}
+            </div>
         </div>
     )
 }
