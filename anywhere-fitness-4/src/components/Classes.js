@@ -11,7 +11,7 @@ export default function Classes() {
 
 //class_type
 //class_location
-//class_duration
+//class_duration ->>>>>> number (in minutes)
 //class_date
 //class_time
 //intensity_level ->>>>>> number/10
