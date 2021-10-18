@@ -15,6 +15,8 @@ import Logout from './components/Logout'
 import Signup from './components/Signup'
 
 //INITIAL FORM STATES
+const AUTH_KEY = "makemesuperman";
+
 const initialLoginValues = {
   username: "",
   password: "",
@@ -33,10 +35,11 @@ const initialSignupErrors = {
   username: "",
   password: "",
   secret: "",
-  role: "", //'instructor' or 'client'
+  role: "",
 }
 const initialLoginDisabled = true;
 const initSignupRoleDisabled = true;
+const initSignupSubmitDisabled = true;
 
 function App() {
   //LOGIN FORM STATE
@@ -47,15 +50,16 @@ function App() {
   const [signupValues, setSignupValues] = useState(initialSignup)
   const [signupErrors, setSignupErrors] = useState(initialSignupErrors)
   const [signupRoleDisabled, setSignupRoleDisabled] = useState(initSignupRoleDisabled);
+  const [signupSubmitDisabled, setSignupSubmitDisabled] = useState(initSignupSubmitDisabled);
 
   //EVENT HANDLERS
   const loginInputChange = (name, value) => {
-    console.log('login input change: ', name, value); //PLACEHOLDER
+    // console.log('login input change: ', name, value); //PLACEHOLDER
     validateLogin(name, value);
     setLoginValues({...loginValues, [name]:value});
   }
   const signupInputChange = (name, value) => {
-    console.log('signup input change: ', name, value); //PLACEHOLDER
+    // console.log('signup input change: ', name, value); //PLACEHOLDER
     validateSignup(name, value);
     setSignupValues({...signupValues, [name]:value});
   }
@@ -74,6 +78,7 @@ function App() {
       .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
   }
   const validateSignup = (name, value) => {
+    // console.log('validating signup now')
     yup.reach(signupSchema, name)
       .validate(value)
       .then(() => setSignupErrors({ ...signupErrors, [name]:''}))
@@ -82,9 +87,25 @@ function App() {
 
   //SIDE EFFECTS
   // - if the form is valid, then enable submit button
+  // - - for LOGIN
   useEffect(() => { 
     loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
 }, [loginValues]);
+
+  // - - for SIGNUP
+  useEffect(() => { 
+    signupSchema.isValid(signupValues).then(valid => setSignupSubmitDisabled(!valid))
+}, [signupValues]);
+  useEffect(() => { //if the secret code is the auth key, enable selection of INSTRUCTOR
+    if(signupValues.secret === AUTH_KEY){
+      setSignupRoleDisabled(false);
+    }
+    else {
+      setSignupRoleDisabled(true);
+      // setSignupValues({...signupValues, role: 'client'}); //if it gets disabled, go back to client
+      // this ^^^^ times out so it's commented out for the moment but it SHOULD get fixed.
+    }
+}, [signupValues]);
 
   return (
     <div className="App">
@@ -115,6 +136,7 @@ function App() {
               values={signupValues}
               change={signupInputChange}
               role_disabled={signupRoleDisabled}
+              submit_disabled={signupSubmitDisabled}
               submit={signupSubmit}
               errors={signupErrors}
             />
