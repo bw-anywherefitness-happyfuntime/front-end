@@ -1,5 +1,7 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom';
+import * as yup from 'yup';
+import loginSchema from './components/validation/loginSchema';
 
 import './App.css'
 
@@ -11,7 +13,52 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 
+//INITIAL FORM STATES
+const initialLoginValues = {
+  username: "",
+  password: "",
+}
+const initialLoginErrors = {
+  username: "",
+  password: "",
+}
+const initialLoginDisabled = true;
+
 function App() {
+  //LOGIN FORM STATE
+  const [loginValues, setLoginValues] = useState(initialLoginValues)
+  const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
+  const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
+
+  //LOGIN FORM EVENT HANDLERS
+  const inputChange = (name, value) => {
+    console.log('login input change: ', name, value); //PLACEHOLDER
+    validateLogin(name, value);
+    setLoginValues({...loginValues, [name]:value});
+  }
+  const loginSubmit = () => {
+    console.log("form submit"); //PLACEHOLDER
+    // const newUser = { //NEED TO CHANGE THESE KEYS TO MATCH API????
+    //   first_name: formValues.first_name.trim(), //TRIM ERRORING OUT HERE
+    //   last_name: formValues.last_name.trim(),
+    //   email: formValues.email.trim(),
+    //   pwd: formValues.pwd.trim(),
+    //   tos: formValues.tos,
+    // }
+    // // console.log(newUser);
+    // postNewUser(newUser);
+  }
+  const validateLogin = (name, value) => {
+    yup.reach(loginSchema, name)
+      .validate(value)
+      .then(() => setLoginErrors({ ...loginErrors, [name]:''}))
+      .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
+  }
+  //SIDE EFFECTS
+  useEffect(() => {
+    loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
+}, [loginValues]);
+
   return (
     <div className="App">
       <Header />
@@ -25,7 +72,13 @@ function App() {
             <Bookings />
           </Route>
           <Route path='/login'>
-            <Login />
+            <Login
+              values={loginValues}
+              change={inputChange}
+              disabled={loginDisabled}
+              submit={loginSubmit}
+              errors={loginErrors}
+              />
           </Route>
           <Route path='/logout'>
             <Logout />
