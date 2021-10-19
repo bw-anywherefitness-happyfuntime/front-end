@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
 import loginSchema from './components/validation/loginSchema';
+import { axiosWithAuth } from './helpers/axiosWithAuth';
 import signupSchema from './components/validation/signupSchema';
-
 import './App.css'
 import PrivateRoute from './components/PrivateRoute'
 import Header from './components/Header'
@@ -13,6 +13,7 @@ import Bookings from './components/Bookings'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
+import axios from 'axios'
 
 //INITIAL FORM STATES
 const AUTH_KEY = "makemesuperman";
@@ -42,8 +43,7 @@ const initSignupRoleDisabled = true;
 const initSignupSubmitDisabled = true;
 
 function App() {
-<<<<<<< class
-=======
+
   //LOGIN FORM STATE
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
@@ -67,10 +67,32 @@ function App() {
   }
 
   const loginSubmit = () => {
+
+    console.log("form submit"); //PLACEHOLDER
+    // const newUser = { //NEED TO CHANGE THESE KEYS TO MATCH API????
+    //   first_name: formValues.first_name.trim(), //TRIM ERRORING OUT HERE
+    //   last_name: formValues.last_name.trim(),
+    //   email: formValues.email.trim(),
+    //   pwd: formValues.pwd.trim(),
+    //   tos: formValues.tos,
+    // }
+    // // console.log(newUser);
+    // postNewUser(newUser);
+    axiosWithAuth()
+    .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
+    .then(res=> console.log(res))
+    .catch(err=> console.log( err.response.data.message ))
+
     console.log("login submit");//placeholder until we sort out auth stuff
+
   }
   const signupSubmit = () => {
     console.log("signup submit");//placeholder until we sort out auth stuff
+    axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
+    .then(res=> {window.localStorage.setItem('token', res.data.username)
+  console.log(res.data)})
+    .catch(err=> console.log({ err }))
+    setSignupValues(initialSignup);
   }
 
   const validateLogin = (name, value) => {
@@ -108,7 +130,7 @@ function App() {
       // this ^^^^ times out so it's commented out for the moment but it SHOULD get fixed.
     }
 }, [signupValues]);
->>>>>>> main
+
 
   return (
     <div className="App">
