@@ -42,6 +42,8 @@ const initSignupRoleDisabled = true;
 const initSignupSubmitDisabled = true;
 
 function App() {
+<<<<<<< class
+=======
   //LOGIN FORM STATE
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
@@ -106,6 +108,7 @@ function App() {
       // this ^^^^ times out so it's commented out for the moment but it SHOULD get fixed.
     }
 }, [signupValues]);
+>>>>>>> main
 
   return (
     <div className="App">
