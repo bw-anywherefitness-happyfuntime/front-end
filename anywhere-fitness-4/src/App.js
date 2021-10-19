@@ -5,7 +5,7 @@ import loginSchema from './components/validation/loginSchema';
 import { axiosWithAuth } from './helpers/axiosWithAuth';
 import signupSchema from './components/validation/signupSchema';
 import './App.css'
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRouteClient from './components/PrivateRoute'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Classes from './components/Classes'
@@ -81,7 +81,10 @@ function App() {
     // postNewUser(newUser);
     axiosWithAuth()
     .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
-    .then(res=> console.log(res))
+    .then(res=> {window.localStorage.setItem('token', res.data.token)
+    console.log(res)
+    setLoginCallErrors('')}
+    )
     .catch(err=> {setLoginCallErrors( err.response.data.message )
     console.log(err.response)}) 
     setLoginValues(initialLoginValues);
@@ -92,7 +95,8 @@ function App() {
     console.log("signup submit");//placeholder until we sort out auth stuff
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
     .then(res=> {window.localStorage.setItem('token', res.data.username)
-  console.log(res.response.data)})
+    setSignupCallErrors('')
+  })
     .catch(err=> {setSignupCallErrors(err.response.data.message)
     console.log(err.response)},
     setSignupValues(initialSignup))
