@@ -24,32 +24,37 @@ export default function Signup(props) {
     return (
         <div className="login">
             <form className="input form" onSubmit={onSubmit}>
-            <label> Username: 
-                    <input 
+            <label> Username:
+                    <input
                         value={values.username}
                         onChange={onChange}
                         name="username"
                         type="text"
                     />
                 </label>
-                <label> Password: 
-                    <input 
+                <label> Password:
+                    <input
                         value={values.password}
                         onChange={onChange}
                         name="password"
                         type="password"
                     />
                 </label>
-                <label> Secret Code: 
-                    <input 
+                <label> Secret Code:
+                    <input
                         value={values.secret}
                         onChange={onChange}
                         name="secret"
                         type="text"
                     />
                 </label>
-                <label>Role: 
-                    <select id="role-dropdown" disabled={role_disabled} value={values.role} name="role" onChange={onChange}>
+                <label>Role:
+                    <select
+                      id="role-dropdown"
+                      disabled={role_disabled}
+                      value={values.role}
+                      name="role"
+                      onChange={onChange}>
                         <option value="">-- select a role --</option>
                         <option value="client">I am a Client.</option>
                         <option value="instructor">I am an Instructor.</option>
@@ -59,8 +64,10 @@ export default function Signup(props) {
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
-                <button id='submitBtn' disabled={submit_disabled}>{values.role === "client"? 'get fit af' : 'make em cry'}</button>
-                
+                <button
+                  id='submitBtn'
+                  disabled={submit_disabled}>{values.role === "client"? 'get fit af' : 'make em cry'}</button>
+
             </form>
         </div>
     )
