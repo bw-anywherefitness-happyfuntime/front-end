@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import './styles/ClassComp.css';
-
+import { useHistory } from "react-router";
 
 export default function Class(props) {
-    const { classData, deleteClass } = props;
+    const { push } = useHistory()
+    const { classData, deleteClass, currentUsername} = props;
     const initFormValues = {
         class_type: classData.class_type,
         class_location: classData.class_location,
@@ -14,7 +15,7 @@ export default function Class(props) {
         intensity_level: classData.intensity_level
     }
     const [formValues, setFormValues] = useState(initFormValues)
-    
+
     function deleteFunc() {
         deleteClass(classData.class_id);
     }
@@ -61,7 +62,17 @@ export default function Class(props) {
         updateClass(formValues);
     }
 
-
+    function bookClass(e) {
+        e.preventDefault();
+        axios.post(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings`, {class_id: classData.class_id})
+        .then(res=> {console.log(res)
+        push('/bookings')})
+        .catch(err=> console.log({ err }))
+    }
+    const buttonSwitch = (window.localStorage.getItem('role') === '2') ? <div className='buttons'>
+    <button onClick={editFunc}>Edit</button>
+    <button onClick={deleteFunc}>Delete</button> 
+    </div>: <button onClick={bookClass}>Book</button>
     return (
         <div className='card'>
             <div className='class-header'>
@@ -73,71 +84,70 @@ export default function Class(props) {
                 <p>Duration: {classData.class_duration}</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
-            <div className='buttons'>
-                <button onClick={editFunc}>Edit</button>
-                <button onClick={deleteFunc}>Delete</button>
-            </div>
-                <form id='editForm' onSubmit={submit} className='hide'>
-                    <div className='form-text'>
+            
+            {buttonSwitch}
+            
+            <form id='editForm' onSubmit={submit} className='hide'>
+                <div className='form-text'>
 
-                        <label>Class Type
-                            <input 
-                                type='text'
-                                name='class_type'
-                                value={formValues.class_type}
-                                onChange={onChange}
-                            />
-                        </label>
+                    <label>Class Type
+                        <input
+                            type='text'
+                            name='class_type'
+                            value={formValues.class_type}
+                            onChange={onChange}
+                        />
+                    </label>
 
-                        <label>Location
-                            <input 
-                                type='text'
-                                name='class_location'
-                                value={formValues.class_location}
-                                onChange={onChange}
-                            />
-                        </label>
+                    <label>Location
+                        <input
+                            type='text'
+                            name='class_location'
+                            value={formValues.class_location}
+                            onChange={onChange}
+                        />
+                    </label>
 
-                        <label>Duration
-                            <input 
-                                type='text'
-                                name='class_duration'
-                                value={formValues.class_duration}
-                                onChange={onChange}
-                            />
-                        </label>
+                    <label>Duration
+                        <input
+                            type='text'
+                            name='class_duration'
+                            value={formValues.class_duration}
+                            onChange={onChange}
+                        />
+                    </label>
 
-                        <label>Time
-                            <input 
-                                type='text'
-                                name='class_time'
-                                value={formValues.class_time}
-                                onChange={onChange}
-                            />
-                        </label>
+                    <label>Time
+                        <input
+                            type='text'
+                            name='class_time'
+                            value={formValues.class_time}
+                            onChange={onChange}
+                        />
+                    </label>
 
-                        <label>Date
-                            <input 
-                                type='date'
-                                name='class_date'
-                                value={formValues.class_date}
-                                onChange={onChange}
-                            />
-                        </label>
+                    <label>Date
+                        <input
+                            type='date'
+                            name='class_date'
+                            value={formValues.class_date}
+                            onChange={onChange}
+                        />
+                    </label>
 
-                        <label>Intensity
-                            <input 
-                                type='text'
-                                name='intensity_level'
-                                value={formValues.intensity_level}
-                                onChange={onChange}
-                            />
-                        </label>
-                    </div>
-                    <div className='btn-container'>
-                        <button id='submitBtn'>Edit Class</button>
-                    </div>
-                </form>
+                    <label>Intensity
+                        <input
+                            type='text'
+                            name='intensity_level'
+                            value={formValues.intensity_level}
+                            onChange={onChange}
+                        />
+                    </label>
+                </div>
+                <div className='btn-container'>
+                    <button id='submitBtn'>Edit Class</button>
+                </div>
+            </form>
         </div>
     )
 }

@@ -16,6 +16,7 @@ const initFormValues = {
 const initDisabled = false;
 
 export default function Classes(props) {
+    const { currentUsername } = props
     const [classes, setClasses] = useState([])
     const [formValues, setFormValues] = useState(initFormValues)
     const [disabled, setDisabled] = useState(initDisabled);
@@ -97,7 +98,7 @@ export default function Classes(props) {
     return (
         <div className='classes'>
             <div className='controls'>
-                <button onClick={toggleForm} id='newClassBtn'>New Class</button>
+                {(window.localStorage.getItem('role') === '2') && <button onClick={toggleForm} id='newClassBtn'>New Class</button>}
             </div>
             <div className='form-container hide'>
                 <form onSubmit={submit}>
@@ -163,6 +164,7 @@ export default function Classes(props) {
             </div>
             <div className='classList-container'>
                 {classes.map(classData => <ClassComp
+                                                    currentUsername={currentUsername}
                                                     classData={classData}
                                                     deleteClass={deleteClass}
                                                     onChange={onChange}

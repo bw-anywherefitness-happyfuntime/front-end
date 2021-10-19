@@ -46,6 +46,7 @@ const initialSignupCallErrors = '';
 function App() {
 
   //LOGIN FORM STATE
+  const [currentUsername, setCurrentUsername] = useState('')
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
   const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
@@ -81,8 +82,9 @@ function App() {
     // postNewUser(newUser);
     axiosWithAuth()
     .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
-    .then(res=> {window.localStorage.setItem('token', res.data.token)
+    .then(res=> {window.localStorage.setItem('role', res.data.role_name)
     console.log(res)
+    setCurrentUsername(res.data.username)
     setLoginCallErrors('')}
     )
     .catch(err=> {setLoginCallErrors( err.response.data.message )
@@ -94,7 +96,9 @@ function App() {
   const signupSubmit = () => {
     console.log("signup submit");//placeholder until we sort out auth stuff
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
-    .then(res=> {window.localStorage.setItem('token', res.data.username)
+    .then(res=> {window.localStorage.setItem('role', res.data.role_id)
+    console.log(res)
+    setCurrentUsername(res.data.username)
     setSignupCallErrors('')
   })
     .catch(err=> {setSignupCallErrors(err.response.data.message)
@@ -146,7 +150,7 @@ function App() {
       <main>
         <Switch>
           <Route path='/classes'>
-            <Classes />
+            <Classes  currentUsername={currentUsername}/>
           </Route>
           <Route path='/bookings'>
             <Bookings />
