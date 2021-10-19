@@ -8,6 +8,7 @@ export default function Login(props) {
         submit,
         disabled,
         errors,
+        callErrors
     } = props;
 
     const onSubmit = evt => {
@@ -43,6 +44,7 @@ export default function Login(props) {
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
+                <div>{callErrors}</div>
                 <div className="form-group submit">
                     <button id='submitBtn' disabled={disabled}>submit</button>
                 </div>

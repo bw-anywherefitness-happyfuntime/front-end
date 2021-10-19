@@ -9,6 +9,7 @@ export default function Signup(props) {
         submit_disabled,
         role_disabled,
         errors,
+        callErrors
     } = props;
 
     const onSubmit = evt => {
@@ -59,6 +60,7 @@ export default function Signup(props) {
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
+                <div>{callErrors}</div>
                 <button id='submitBtn' disabled={submit_disabled}>{values.role === "client"? 'get fit af' : 'make em cry'}</button>
                 
             </form>
