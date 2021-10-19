@@ -41,6 +41,7 @@ const initialSignupErrors = {
 const initialLoginDisabled = true;
 const initSignupRoleDisabled = true;
 const initSignupSubmitDisabled = true;
+const initialSignupCallErrors = '';
 
 function App() {
 
@@ -48,12 +49,12 @@ function App() {
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
   const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
-
+  const [loginCallErrors, setLoginCallErrors]= useState('');
   const [signupValues, setSignupValues] = useState(initialSignup)
   const [signupErrors, setSignupErrors] = useState(initialSignupErrors)
   const [signupRoleDisabled, setSignupRoleDisabled] = useState(initSignupRoleDisabled);
   const [signupSubmitDisabled, setSignupSubmitDisabled] = useState(initSignupSubmitDisabled);
-
+  const[signupCallErrors, setSignupCallErrors] = useState(initialSignupCallErrors)
   //EVENT HANDLERS
   const loginInputChange = (name, value) => {
     // console.log('login input change: ', name, value); //PLACEHOLDER
@@ -81,8 +82,9 @@ function App() {
     axiosWithAuth()
     .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
     .then(res=> console.log(res))
-    .catch(err=> console.log( err.response.data.message ))
-
+    .catch(err=> {setLoginCallErrors( err.response.data.message )
+    console.log(err.response)}) 
+    setLoginValues(initialLoginValues);
     console.log("login submit");//placeholder until we sort out auth stuff
 
   }
@@ -90,9 +92,10 @@ function App() {
     console.log("signup submit");//placeholder until we sort out auth stuff
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
     .then(res=> {window.localStorage.setItem('token', res.data.username)
-  console.log(res.data)})
-    .catch(err=> console.log({ err }))
-    setSignupValues(initialSignup);
+  console.log(res.response.data)})
+    .catch(err=> {setSignupCallErrors(err.response.data.message)
+    console.log(err.response)},
+    setSignupValues(initialSignup))
   }
 
   const validateLogin = (name, value) => {
@@ -151,6 +154,7 @@ function App() {
               disabled={loginDisabled}
               submit={loginSubmit}
               errors={loginErrors}
+              callErrors={loginCallErrors}
               />
           </Route>
           <Route path='/logout'>
@@ -164,6 +168,7 @@ function App() {
               submit_disabled={signupSubmitDisabled}
               submit={signupSubmit}
               errors={signupErrors}
+              callErrors={signupCallErrors}
             />
           </Route>
         </Switch>
