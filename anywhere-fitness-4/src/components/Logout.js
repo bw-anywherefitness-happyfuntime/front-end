@@ -5,7 +5,7 @@ import { axiosWithAuth } from '../helpers/axiosWithAuth'
 
 export default function Logout() {
     useEffect(()=> {
-    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('role')
 })
     return (
         <div>Logout</div>
