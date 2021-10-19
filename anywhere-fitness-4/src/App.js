@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
 import loginSchema from './components/validation/loginSchema';
 import { axiosWithAuth } from './helpers/axiosWithAuth';
