@@ -4,7 +4,7 @@ import './styles/ClassComp.css';
 
 
 export default function Class(props) {
-    const { classData, deleteClass, editClass } = props;
+    const { classData, deleteClass } = props;
     const initFormValues = {
         class_type: classData.class_type,
         class_location: classData.class_location,

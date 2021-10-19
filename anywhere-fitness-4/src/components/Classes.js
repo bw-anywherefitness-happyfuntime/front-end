@@ -75,13 +75,6 @@ export default function Classes(props) {
             .finally(() => setFormValues(initFormValues))
     }
 
-    function editClass(id) {
-        const toEdit = classes.filter(item => item.class_id === id);
-        document.querySelector('.form-container').classList.remove('hide');
-        document.querySelector('#newClassBtn').classList.add('hide');
-    }
-
-
 
     // EFFECTS
     useEffect(getClasses, []);
@@ -172,7 +165,6 @@ export default function Classes(props) {
                 {classes.map(classData => <ClassComp
                                                     classData={classData}
                                                     deleteClass={deleteClass}
-                                                    editClass={editClass}
                                                     onChange={onChange}
                                                     key={classData.class_id}/>)}
             </div>
