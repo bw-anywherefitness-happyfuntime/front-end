@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-function PrivateRoute({ component: Component, ...rest}) {
+function PrivateRouteClient({ component: Component, ...rest}) {
     return (
         <Route { ...rest} render={() => {
             if(window.localStorage.getItem('token')) {
@@ -13,4 +13,4 @@ function PrivateRoute({ component: Component, ...rest}) {
     );
 }
 
-export default PrivateRoute
+export default PrivateRouteClient

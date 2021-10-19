@@ -1,6 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { axiosWithAuth } from '../helpers/axiosWithAuth'
+
+
 
 export default function Logout() {
+    useEffect(()=> {
+    window.localStorage.removeItem('token')
+})
     return (
         <div>Logout</div>
     )
