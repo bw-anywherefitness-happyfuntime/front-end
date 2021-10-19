@@ -173,6 +173,7 @@ export default function Classes(props) {
                                                     classData={classData}
                                                     deleteClass={deleteClass}
                                                     editClass={editClass}
+                                                    onChange={onChange}
                                                     key={classData.class_id}/>)}
             </div>
         </div>

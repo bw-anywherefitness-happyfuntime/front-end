@@ -42,3 +42,19 @@
 h2 {
     margin-bottom: 2%;
 }
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide {
+    display: none;
+}
