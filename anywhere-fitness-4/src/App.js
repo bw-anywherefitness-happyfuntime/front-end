@@ -88,24 +88,21 @@ function App() {
   //SIDE EFFECTS
   // - if the form is valid, then enable submit button
   // - - for LOGIN
-  useEffect(() => { 
+  useEffect(() => {
     loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
-}, [loginValues]);
+  }, [loginValues]);
 
   // - - for SIGNUP
-  useEffect(() => { 
+  useEffect(() => {
     signupSchema.isValid(signupValues).then(valid => setSignupSubmitDisabled(!valid))
-}, [signupValues]);
+  }, [signupValues]);
+
   useEffect(() => { //if the secret code is the auth key, enable selection of INSTRUCTOR
     if(signupValues.secret === AUTH_KEY){
       setSignupRoleDisabled(false);
     }
-    else {
-      setSignupRoleDisabled(true);
-      // setSignupValues({...signupValues, role: 'client'}); //if it gets disabled, go back to client
-      // this ^^^^ times out so it's commented out for the moment but it SHOULD get fixed.
-    }
-}, [signupValues]);
+  }, [signupValues]);
+
 
   return (
     <div className="App">
@@ -132,7 +129,7 @@ function App() {
             <Logout />
           </Route>
           <Route path='/signup'>
-            <Signup 
+            <Signup
               values={signupValues}
               change={signupInputChange}
               role_disabled={signupRoleDisabled}
