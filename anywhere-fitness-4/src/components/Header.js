@@ -2,14 +2,16 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
-    
+    const role = window.localStorage.getItem('role')
     const navMagic=
-        (!!window.localStorage.getItem('role')) 
+        !!role 
         ? (<Link className='nav nav-4' to='/logout'>LOGOUT</Link>) 
         : (
             [<Link className='nav nav-4' to='/login'>LOGIN</Link>,
             <Link className='nav nav-5' to='/signup'>SIGNUP</Link>]
         )
+    const bookingMagic=
+        role === 'client' && (<Link className='nav nav-3' to='/bookings'>BOOKINGS</Link>)
     return (
         <header className="App-header">
             <div className='header-container'>
@@ -22,7 +24,7 @@ export default function Header() {
                 <div className='navigations'>
                     <Link className='nav nav-1' to='/'>HOME</Link>
                     <Link className='nav nav-2' to='/classes'>CLASSES</Link>
-                    <Link className='nav nav-3' to='/bookings'>BOOKINGS</Link>
+                    {bookingMagic}
                     {navMagic}
                 </div>
             </div>
