@@ -45,10 +45,10 @@ export default function Login(props) {
                     </label>
                 </div>
                 <div className="errors">
-                    <div>{errors.username}</div>
-                    <div>{errors.password}</div>
+                    <div style={{ color: 'red' }}>{errors.username}</div>
+                    <div style={{ color: 'red' }}>{errors.password}</div>
                 </div>
-                <div>{callErrors}</div>
+                <div style={{ color: 'red' }}>{callErrors}</div>
                 <div className="form-group submit">
                     <button className='submit-login' disabled={disabled}>submit</button>
                 </div>

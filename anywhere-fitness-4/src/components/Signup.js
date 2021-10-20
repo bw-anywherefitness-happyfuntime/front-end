@@ -69,10 +69,10 @@ export default function Signup(props) {
                     </label>
                 </div>
                 <div className="errors">
-                    <div>{errors.username}</div>
-                    <div>{errors.password}</div>
+                    <div style={{ color: 'red' }}>{errors.password}</div>
+                    <div style={{ color: 'red' }}>{errors.username}</div>
                 </div>
-                <div>{callErrors}</div>
+                <div style={{ color: 'red' }}>{callErrors}</div>
                 <button className='submit-signup' disabled={submit_disabled}>{values.role === "client" ? 'get fit af' : 'make em cry'}</button>
 
             </form>
