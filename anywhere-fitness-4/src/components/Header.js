@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
+    
     return (
         <header className="App-header">
-            <div>LOGO</div>
+            <div>logo</div>
             <div className='navigations'>
                 <Link to='/'>HOME</Link>
                 <Link to='/classes'>CLASSES</Link>

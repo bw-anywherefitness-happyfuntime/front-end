@@ -2,6 +2,8 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import './App.css'
+import './header.css'
+import './footer.css'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -11,7 +13,11 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
 
+
 function App() {
+  
+  
+
   return (
     <div className="App">
       <Header />
