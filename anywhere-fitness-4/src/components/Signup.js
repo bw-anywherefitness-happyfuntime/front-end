@@ -24,32 +24,32 @@ export default function Signup(props) {
 
     return (
         <div className="login">
-            <form className="input form" onSubmit={onSubmit}>
-            <label> Username: 
-                    <input 
+            <form className="signup-input signup-form" onSubmit={onSubmit}>
+                <label> Username:
+                    <input
                         value={values.username}
                         onChange={onChange}
                         name="username"
                         type="text"
                     />
                 </label>
-                <label> Password: 
-                    <input 
+                <label> Password:
+                    <input
                         value={values.password}
                         onChange={onChange}
                         name="password"
                         type="password"
                     />
                 </label>
-                <label> Secret Code: 
-                    <input 
+                <label> Secret Code:
+                    <input
                         value={values.secret}
                         onChange={onChange}
                         name="secret"
                         type="text"
                     />
                 </label>
-                <label>Role: 
+                <label>Role:
                     <select id="role-dropdown" disabled={role_disabled} value={values.role} name="role" onChange={onChange}>
                         <option value="">-- select a role --</option>
                         <option value="client">I am a Client.</option>
@@ -61,8 +61,8 @@ export default function Signup(props) {
                     <div>{errors.password}</div>
                 </div>
                 <div>{callErrors}</div>
-                <button id='submitBtn' disabled={submit_disabled}>{values.role === "client"? 'get fit af' : 'make em cry'}</button>
-                
+                <button id='submitBtn' disabled={submit_disabled}>{values.role === "client" ? 'get fit af' : 'make em cry'}</button>
+
             </form>
         </div>
     )

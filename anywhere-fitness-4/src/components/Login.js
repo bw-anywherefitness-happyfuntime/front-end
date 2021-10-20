@@ -23,17 +23,17 @@ export default function Login(props) {
 
     return (
         <div className="login">
-            <form className="input form" onSubmit={onSubmit}>
-            <label> Username: 
-                    <input 
+            <form className="login-input login-form" onSubmit={onSubmit}>
+                <label> Username:
+                    <input
                         value={values.username}
                         onChange={onChange}
                         name="username"
                         type="text"
                     />
                 </label>
-                <label> Password: 
-                    <input 
+                <label> Password:
+                    <input
                         value={values.password}
                         onChange={onChange}
                         name="password"
