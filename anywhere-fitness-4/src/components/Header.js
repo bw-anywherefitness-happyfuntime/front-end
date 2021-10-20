@@ -10,9 +10,6 @@ export default function Header() {
             [<Link className='nav nav-4' to='/login'>LOGIN</Link>,
             <Link className='nav nav-5' to='/signup'>SIGNUP</Link>]
         )
-        
-        console.log('foobar')
-    console.log(window.localStorage.getItem('role'))
     return (
         <header className="App-header">
             <div className='header-container'>
