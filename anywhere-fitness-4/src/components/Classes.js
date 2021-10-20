@@ -42,6 +42,7 @@ export default function Classes(props) {
         axios.get('https://bw-fitness-4.herokuapp.com/api/classes')
             .then(res => {
                 setClasses(res.data);
+                console.log(res)
             })
             .catch(err => console.log(err))
     }
@@ -76,8 +77,8 @@ export default function Classes(props) {
 
 
     // EFFECTS
-    useEffect(getClasses, []);
-    useEffect(getClasses, [classes])
+    
+    useEffect(getClasses, [])
 
     // HELPER FUNCTIONS
     function change(name, value) {

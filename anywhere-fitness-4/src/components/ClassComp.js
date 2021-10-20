@@ -86,6 +86,12 @@ export default function Class(props) {
                 <p>Duration: {classData.class_duration}</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
+            {(window.localStorage.getItem('role')=== '2') && <div>Attendees:
+            <ul>
+                {classData.attendance.map(attendees=> <li>{attendees.username}</li>)}
+            </ul>
+
+            </div>}
 
             {buttonSwitch}
 
