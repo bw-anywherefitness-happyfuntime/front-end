@@ -161,7 +161,7 @@ function App() {
             <Classes currentUsername={currentUsername} />
           </Route>
           <Route path='/bookings'>
-            <Bookings />
+            <Bookings currentUsername={currentUsername}/>
           </Route>
           <Route path='/login'>
             <Login
