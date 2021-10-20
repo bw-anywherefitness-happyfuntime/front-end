@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import './styles/ClassComp.css';
 import { useHistory } from "react-router";
 
 export default function Class(props) {
     const { push } = useHistory()
-    const { classData, deleteClass, currentUsername} = props;
+    const { classData, deleteClass, currentUsername } = props;
     const initFormValues = {
         class_type: classData.class_type,
         class_location: classData.class_location,
@@ -64,19 +63,22 @@ export default function Class(props) {
 
     function bookClass(e) {
         e.preventDefault();
-        axios.post(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings`, {class_id: classData.class_id})
-        .then(res=> {console.log(res)
-        push('/bookings')})
-        .catch(err=> console.log({ err }))
+        axios.post(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings`, { class_id: classData.class_id })
+            .then(res => {
+                console.log(res)
+                push('/bookings')
+            })
+            .catch(err => console.log({ err }))
     }
     const buttonSwitch = (window.localStorage.getItem('role') === '2') ? <div className='buttons'>
-    <button onClick={editFunc}>Edit</button>
-    <button onClick={deleteFunc}>Delete</button> 
-    </div>: <button onClick={bookClass}>Book</button>
+        <button onClick={editFunc}>Edit</button>
+        <button onClick={deleteFunc}>Delete</button>
+    </div> : <button onClick={bookClass}>Book</button>
+
     return (
         <div className='card'>
             <div className='class-header'>
-                <h2>Class: {classData.class_type}</h2>
+                <h2>Class: <span>{classData.class_type}</span> </h2>
                 <h3>{classData.class_date} @ {classData.class_time}</h3>
             </div>
             <div className='contents'>
@@ -84,9 +86,9 @@ export default function Class(props) {
                 <p>Duration: {classData.class_duration}</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
-            
+
             {buttonSwitch}
-            
+
             <form id='editForm' onSubmit={submit} className='hide'>
                 <div className='form-text'>
 

@@ -23,30 +23,34 @@ export default function Login(props) {
 
     return (
         <div className="login">
-            <form className="input form" onSubmit={onSubmit}>
-            <label> Username: 
-                    <input 
-                        value={values.username}
-                        onChange={onChange}
-                        name="username"
-                        type="text"
-                    />
-                </label>
-                <label> Password: 
-                    <input 
-                        value={values.password}
-                        onChange={onChange}
-                        name="password"
-                        type="password"
-                    />
-                </label>
+            <form className="login-input login-form" onSubmit={onSubmit}>
+                <div className='login-col'>
+                    <label> Username:
+                        <input
+                            value={values.username}
+                            onChange={onChange}
+                            name="username"
+                            type="text"
+                        />
+                    </label>
+                </div>
+                <div className='login-col'>
+                    <label> Password:
+                        <input
+                            value={values.password}
+                            onChange={onChange}
+                            name="password"
+                            type="password"
+                        />
+                    </label>
+                </div>
                 <div className="errors">
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
                 <div>{callErrors}</div>
                 <div className="form-group submit">
-                    <button id='submitBtn' disabled={disabled}>submit</button>
+                    <button className='submit-login' disabled={disabled}>submit</button>
                 </div>
             </form>
         </div>

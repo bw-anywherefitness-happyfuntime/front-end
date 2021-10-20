@@ -23,46 +23,58 @@ export default function Signup(props) {
     }
 
     return (
-        <div className="login">
-            <form className="input form" onSubmit={onSubmit}>
-            <label> Username: 
-                    <input 
-                        value={values.username}
-                        onChange={onChange}
-                        name="username"
-                        type="text"
-                    />
-                </label>
-                <label> Password: 
-                    <input 
-                        value={values.password}
-                        onChange={onChange}
-                        name="password"
-                        type="password"
-                    />
-                </label>
-                <label> Secret Code: 
-                    <input 
-                        value={values.secret}
-                        onChange={onChange}
-                        name="secret"
-                        type="text"
-                    />
-                </label>
-                <label>Role: 
-                    <select id="role-dropdown" disabled={role_disabled} value={values.role} name="role" onChange={onChange}>
-                        <option value="">-- select a role --</option>
-                        <option value="client">I am a Client.</option>
-                        <option value="instructor">I am an Instructor.</option>
-                    </select>
-                </label>
+        <div className="signup">
+            <form className="signup-input signup-form" onSubmit={onSubmit}>
+                <div className='signup-col signup-col-1'>
+                    <label> Username:
+                        <br />
+                        <input
+                            value={values.username}
+                            onChange={onChange}
+                            name="username"
+                            type="text"
+                        />
+                    </label>
+                </div>
+                <div className='signup-col signup-col-2'>
+                    <label> Password:
+                        <br />
+                        <input
+                            value={values.password}
+                            onChange={onChange}
+                            name="password"
+                            type="password"
+                        />
+                    </label>
+                </div>
+                <div className='signup-col signup-col-3'>
+                    <label> Secret Code:
+                        <br />
+                        <input
+                            value={values.secret}
+                            onChange={onChange}
+                            name="secret"
+                            type="text"
+                        />
+                    </label>
+                </div>
+                <div className='signup-col signup-col-4'>
+                    <label>Role:
+                        <br />
+                        <select id="role-dropdown" disabled={role_disabled} value={values.role} name="role" onChange={onChange}>
+                            <option value="">-- select a role --</option>
+                            <option value="client">I am a Client.</option>
+                            <option value="instructor">I am an Instructor.</option>
+                        </select>
+                    </label>
+                </div>
                 <div className="errors">
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                 </div>
                 <div>{callErrors}</div>
-                <button id='submitBtn' disabled={submit_disabled}>{values.role === "client"? 'get fit af' : 'make em cry'}</button>
-                
+                <button className='submit-signup' disabled={submit_disabled}>{values.role === "client" ? 'get fit af' : 'make em cry'}</button>
+
             </form>
         </div>
     )

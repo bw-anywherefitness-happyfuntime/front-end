@@ -1,8 +1,14 @@
-.navigations {
-    display: flex;
+@import '../src/components/styles/Header.css';
+@import '../src/components/styles/Footer.css';
+@import '../src/components/styles/Home.css';
+@import '../src/components/styles/Classes.css';
+@import '../src/components/styles/ClassComp.css';
+#root {
+    background-color: #1e1e1c;
 }
 
-.navigations div {
-    display: flex;
-    padding: 10px;
+* {
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: white;
 }

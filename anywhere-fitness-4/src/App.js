@@ -13,6 +13,7 @@ import Bookings from './components/Bookings'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import Signup from './components/Signup'
+import Home from './components/Home'
 import axios from 'axios'
 
 //INITIAL FORM STATES
@@ -50,22 +51,22 @@ function App() {
   const [loginValues, setLoginValues] = useState(initialLoginValues)
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors)
   const [loginDisabled, setLoginDisabled] = useState(initialLoginDisabled);
-  const [loginCallErrors, setLoginCallErrors]= useState('');
+  const [loginCallErrors, setLoginCallErrors] = useState('');
   const [signupValues, setSignupValues] = useState(initialSignup)
   const [signupErrors, setSignupErrors] = useState(initialSignupErrors)
   const [signupRoleDisabled, setSignupRoleDisabled] = useState(initSignupRoleDisabled);
   const [signupSubmitDisabled, setSignupSubmitDisabled] = useState(initSignupSubmitDisabled);
-  const[signupCallErrors, setSignupCallErrors] = useState(initialSignupCallErrors)
+  const [signupCallErrors, setSignupCallErrors] = useState(initialSignupCallErrors)
   //EVENT HANDLERS
   const loginInputChange = (name, value) => {
     // console.log('login input change: ', name, value); //PLACEHOLDER
     validateLogin(name, value);
-    setLoginValues({...loginValues, [name]:value});
+    setLoginValues({ ...loginValues, [name]: value });
   }
   const signupInputChange = (name, value) => {
     // console.log('signup input change: ', name, value); //PLACEHOLDER
     validateSignup(name, value);
-    setSignupValues({...signupValues, [name]:value});
+    setSignupValues({ ...signupValues, [name]: value });
   }
 
   const loginSubmit = () => {
@@ -81,14 +82,18 @@ function App() {
     // // console.log(newUser);
     // postNewUser(newUser);
     axiosWithAuth()
-    .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
-    .then(res=> {window.localStorage.setItem('role', res.data.role_name)
-    console.log(res)
-    setCurrentUsername(res.data.username)
-    setLoginCallErrors('')}
-    )
-    .catch(err=> {setLoginCallErrors( err.response.data.message )
-    console.log(err.response)}) 
+      .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
+      .then(res => {
+        window.localStorage.setItem('role', res.data.role_name)
+        console.log(res)
+        setCurrentUsername(res.data.username)
+        setLoginCallErrors('')
+      }
+      )
+      .catch(err => {
+        setLoginCallErrors(err.response.data.message)
+        console.log(err.response)
+      })
     setLoginValues(initialLoginValues);
     console.log("login submit");//placeholder until we sort out auth stuff
 
@@ -96,43 +101,46 @@ function App() {
   const signupSubmit = () => {
     console.log("signup submit");//placeholder until we sort out auth stuff
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
-    .then(res=> {window.localStorage.setItem('role', res.data.role_id)
-    console.log(res)
-    setCurrentUsername(res.data.username)
-    setSignupCallErrors('')
-  })
-    .catch(err=> {setSignupCallErrors(err.response.data.message)
-    console.log(err.response)},
-    setSignupValues(initialSignup))
+      .then(res => {
+        window.localStorage.setItem('role', res.data.role_id)
+        console.log(res)
+        setCurrentUsername(res.data.username)
+        setSignupCallErrors('')
+      })
+      .catch(err => {
+        setSignupCallErrors(err.response.data.message)
+        console.log(err.response)
+      },
+        setSignupValues(initialSignup))
   }
 
   const validateLogin = (name, value) => {
     yup.reach(loginSchema, name)
       .validate(value)
-      .then(() => setLoginErrors({ ...loginErrors, [name]:''}))
+      .then(() => setLoginErrors({ ...loginErrors, [name]: '' }))
       .catch(err => setLoginErrors({ ...loginErrors, [name]: err.errors[0] }))
   }
   const validateSignup = (name, value) => {
     // console.log('validating signup now')
     yup.reach(signupSchema, name)
       .validate(value)
-      .then(() => setSignupErrors({ ...signupErrors, [name]:''}))
+      .then(() => setSignupErrors({ ...signupErrors, [name]: '' }))
       .catch(err => setSignupErrors({ ...signupErrors, [name]: err.errors[0] }))
   }
 
   //SIDE EFFECTS
   // - if the form is valid, then enable submit button
   // - - for LOGIN
-  useEffect(() => { 
+  useEffect(() => {
     loginSchema.isValid(loginValues).then(valid => setLoginDisabled(!valid))
-}, [loginValues]);
+  }, [loginValues]);
 
   // - - for SIGNUP
-  useEffect(() => { 
+  useEffect(() => {
     signupSchema.isValid(signupValues).then(valid => setSignupSubmitDisabled(!valid))
-}, [signupValues]);
+  }, [signupValues]);
   useEffect(() => { //if the secret code is the auth key, enable selection of INSTRUCTOR
-    if(signupValues.secret === AUTH_KEY){
+    if (signupValues.secret === AUTH_KEY) {
       setSignupRoleDisabled(false);
     }
     else {
@@ -140,7 +148,7 @@ function App() {
       // setSignupValues({...signupValues, role: 'client'}); //if it gets disabled, go back to client
       // this ^^^^ times out so it's commented out for the moment but it SHOULD get fixed.
     }
-}, [signupValues]);
+  }, [signupValues]);
 
 
   return (
@@ -150,7 +158,7 @@ function App() {
       <main>
         <Switch>
           <Route path='/classes'>
-            <Classes  currentUsername={currentUsername}/>
+            <Classes currentUsername={currentUsername} />
           </Route>
           <Route path='/bookings'>
             <Bookings />
@@ -163,13 +171,13 @@ function App() {
               submit={loginSubmit}
               errors={loginErrors}
               callErrors={loginCallErrors}
-              />
+            />
           </Route>
           <Route path='/logout'>
             <Logout />
           </Route>
           <Route path='/signup'>
-            <Signup 
+            <Signup
               values={signupValues}
               change={signupInputChange}
               role_disabled={signupRoleDisabled}
@@ -178,6 +186,10 @@ function App() {
               errors={signupErrors}
               callErrors={signupCallErrors}
             />
+          </Route>
+
+          <Route path='/'>
+            <Home />
           </Route>
         </Switch>
       </main>
