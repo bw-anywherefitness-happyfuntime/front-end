@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ClassComp from './ClassComp.js'
 import axios from 'axios'
-import './styles/Classes.css'
-
 
 const initFormValues = {
     class_type: '',
@@ -31,7 +29,7 @@ export default function Classes(props) {
     }
 
     // Delete Class
-    function deleteClass(id) {        
+    function deleteClass(id) {
         axios.delete(`https://bw-fitness-4.herokuapp.com/api/classes/${id}`)
             .then(res => {
                 console.log(res.data);
@@ -84,8 +82,8 @@ export default function Classes(props) {
     // HELPER FUNCTIONS
     function change(name, value) {
         setFormValues({
-          ...formValues,
-          [name]: value
+            ...formValues,
+            [name]: value
         })
     }
 
@@ -105,7 +103,7 @@ export default function Classes(props) {
                     <div className='form-text'>
 
                         <label>Class Type
-                            <input 
+                            <input
                                 type='text'
                                 name='class_type'
                                 value={formValues.class_type}
@@ -114,7 +112,7 @@ export default function Classes(props) {
                         </label>
 
                         <label>Location
-                            <input 
+                            <input
                                 type='text'
                                 name='class_location'
                                 value={formValues.class_location}
@@ -123,7 +121,7 @@ export default function Classes(props) {
                         </label>
 
                         <label>Duration
-                            <input 
+                            <input
                                 type='text'
                                 name='class_duration'
                                 value={formValues.class_duration}
@@ -132,7 +130,7 @@ export default function Classes(props) {
                         </label>
 
                         <label>Time
-                            <input 
+                            <input
                                 type='text'
                                 name='class_time'
                                 value={formValues.class_time}
@@ -142,7 +140,7 @@ export default function Classes(props) {
                     </div>
                     <div className='form-text'>
                         <label>Date
-                            <input 
+                            <input
                                 type='date'
                                 name='class_date'
                                 value={formValues.class_date}
@@ -151,7 +149,7 @@ export default function Classes(props) {
                         </label>
 
                         <label>Intensity
-                            <input 
+                            <input
                                 type='text'
                                 name='intensity_level'
                                 value={formValues.intensity_level}
@@ -164,11 +162,11 @@ export default function Classes(props) {
             </div>
             <div className='classList-container'>
                 {classes.map(classData => <ClassComp
-                                                    currentUsername={currentUsername}
-                                                    classData={classData}
-                                                    deleteClass={deleteClass}
-                                                    onChange={onChange}
-                                                    key={classData.class_id}/>)}
+                    currentUsername={currentUsername}
+                    classData={classData}
+                    deleteClass={deleteClass}
+                    onChange={onChange}
+                    key={classData.class_id} />)}
             </div>
         </div>
     )

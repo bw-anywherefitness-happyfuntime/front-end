@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    border-bottom: dotted 4px rgba(196, 165, 98, 0.7);
 }
 
 .form-container {

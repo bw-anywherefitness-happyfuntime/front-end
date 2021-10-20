@@ -4,7 +4,7 @@
 }
 
 .card {
-    border: 3px solid black;
+    border: 5px dotted rgba(196, 165, 98, 0.7);
     flex-basis: 25%;
     flex-shrink: 0;
     flex-grow: 0;
@@ -13,12 +13,23 @@
     overflow: hidden;
 }
 
+.class-header h2, .class-header h3, .class-header h2 span {
+    color: black
+}
+
+.class-header h2 span {
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #ab8205
+}
+
 .class-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: aqua;
+    background-color: #fff;
     padding: 5%;
     width: 100%;
     border-bottom: 2px solid black;
@@ -32,11 +43,29 @@
     display: flex;
     justify-content: flex-end;
     margin: 3%;
+    color: black
 }
 
 .buttons button {
     margin: 1%;
     padding: 1%;
+    color: black
+}
+
+button {
+    color: rgb(196, 165, 98);
+    border: solid rgb(196, 165, 98) 2px;
+    background-color: #1e1e1c;
+    border-radius: 12px;
+    width: 70px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+button:hover {
+    color: black;
+    background-color: rgb(224, 158, 13);
+    font-weight: bold;
 }
 
 h2 {

@@ -1,6 +1,8 @@
 @import '../src/components/styles/Header.css';
 @import '../src/components/styles/Footer.css';
 @import '../src/components/styles/Home.css';
+@import '../src/components/styles/Classes.css';
+@import '../src/components/styles/ClassComp.css';
 #root {
     background-color: #1e1e1c;
 }
