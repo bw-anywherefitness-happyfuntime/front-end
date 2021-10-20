@@ -14,6 +14,14 @@ export default function Bookings(props) {
             .catch(err => console.log({ err }))
 
     }, [])
+
+    const handleDelete = booking => {
+        console.log('button clicked')
+        
+        axios.delete(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings/${booking.booking_id}`)
+        .then(res=> setBookings(res.data.currentBookings))
+        .catch(err => console.log({ err }))
+    }
     return (
 
         <div>
@@ -25,6 +33,7 @@ export default function Bookings(props) {
                         <p>Date: {booking.class_date}</p>
                         <p>Location: {booking.class_location}</p>
                         <p>Time: {booking.class_time}</p>
+                        <button onClick={()=> handleDelete(booking)}>Cancel Booking</button>
                     </div>
                 )
             })}
