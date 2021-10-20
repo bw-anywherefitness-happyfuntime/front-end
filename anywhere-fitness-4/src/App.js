@@ -15,7 +15,7 @@ import Logout from './components/Logout'
 import Signup from './components/Signup'
 import Home from './components/Home'
 import axios from 'axios'
-
+import { useHistory } from 'react-router';
 //INITIAL FORM STATES
 const AUTH_KEY = "makemesuperman";
 
@@ -45,6 +45,7 @@ const initSignupSubmitDisabled = true;
 const initialSignupCallErrors = '';
 
 function App() {
+  const { push } = useHistory();
 
   //LOGIN FORM STATE
   const [currentUsername, setCurrentUsername] = useState('')
@@ -85,9 +86,9 @@ function App() {
       .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
       .then(res => {
         window.localStorage.setItem('role', res.data.role_name)
-        console.log(res)
         setCurrentUsername(res.data.username)
         setLoginCallErrors('')
+        push('/classes')
       }
       )
       .catch(err => {
@@ -103,7 +104,6 @@ function App() {
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
       .then(res => {
         window.localStorage.setItem('role', res.data.role_id)
-        console.log(res)
         setCurrentUsername(res.data.username)
         setSignupCallErrors('')
       })
@@ -174,7 +174,7 @@ function App() {
             />
           </Route>
           <Route path='/logout'>
-            <Logout />
+            <Logout setCurrentUsername={setCurrentUsername}/>
           </Route>
           <Route path='/signup'>
             <Signup
