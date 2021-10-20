@@ -15,7 +15,7 @@ import Logout from './components/Logout'
 import Signup from './components/Signup'
 import Home from './components/Home'
 import axios from 'axios'
-
+import { useHistory } from 'react-router';
 //INITIAL FORM STATES
 const AUTH_KEY = "makemesuperman";
 
@@ -45,6 +45,7 @@ const initSignupSubmitDisabled = true;
 const initialSignupCallErrors = '';
 
 function App() {
+  const { push } = useHistory();
 
   //LOGIN FORM STATE
   const [currentUsername, setCurrentUsername] = useState('')
@@ -88,6 +89,7 @@ function App() {
         console.log(res)
         setCurrentUsername(res.data.username)
         setLoginCallErrors('')
+        push('/classes')
       }
       )
       .catch(err => {

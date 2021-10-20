@@ -1,13 +1,16 @@
 import React, {useEffect} from 'react'
-import { axiosWithAuth } from '../helpers/axiosWithAuth'
+import { useHistory } from 'react-router'
 
 
 
 export default function Logout() {
+    const { push } = useHistory()
     useEffect(()=> {
     window.localStorage.removeItem('role')
+    push('/')
+
 })
     return (
-        <div>Logout</div>
+        <div>Logged out</div>
     )
 }
