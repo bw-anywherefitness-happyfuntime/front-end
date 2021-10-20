@@ -103,9 +103,9 @@ function App() {
     console.log("signup submit");//placeholder until we sort out auth stuff
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
       .then(res => {
-        window.localStorage.setItem('role', res.data.role_id)
         setCurrentUsername(res.data.username)
         setSignupCallErrors('')
+        push('/login')
       })
       .catch(err => {
         setSignupCallErrors(err.response.data.message)
