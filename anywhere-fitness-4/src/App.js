@@ -86,7 +86,6 @@ function App() {
       .post('https://bw-fitness-4.herokuapp.com/api/users/login', loginValues)
       .then(res => {
         window.localStorage.setItem('role', res.data.role_name)
-        console.log(res)
         setCurrentUsername(res.data.username)
         setLoginCallErrors('')
         push('/classes')
@@ -105,7 +104,6 @@ function App() {
     axios.post('https://bw-fitness-4.herokuapp.com/api/users/register', signupValues)
       .then(res => {
         window.localStorage.setItem('role', res.data.role_id)
-        console.log(res)
         setCurrentUsername(res.data.username)
         setSignupCallErrors('')
       })
@@ -176,7 +174,7 @@ function App() {
             />
           </Route>
           <Route path='/logout'>
-            <Logout />
+            <Logout setCurrentUsername={setCurrentUsername}/>
           </Route>
           <Route path='/signup'>
             <Signup

@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
-    const navMagic = (window.localStorage.getItem('role')) 
+    
+    const navMagic=
+        (!!window.localStorage.getItem('role')) 
         ? (<Link className='nav nav-4' to='/logout'>LOGOUT</Link>) 
         : (
             [<Link className='nav nav-4' to='/login'>LOGIN</Link>,
             <Link className='nav nav-5' to='/signup'>SIGNUP</Link>]
         )
+        
+        console.log('foobar')
+    console.log(window.localStorage.getItem('role'))
     return (
         <header className="App-header">
             <div className='header-container'>
@@ -22,7 +27,6 @@ export default function Header() {
                     <Link className='nav nav-2' to='/classes'>CLASSES</Link>
                     <Link className='nav nav-3' to='/bookings'>BOOKINGS</Link>
                     {navMagic}
-
                 </div>
             </div>
         </header>
