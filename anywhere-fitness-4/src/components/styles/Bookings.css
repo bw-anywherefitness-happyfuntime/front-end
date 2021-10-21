@@ -1,0 +1,125 @@
+.bookings-wrap {
+    width: 100%;
+    border-bottom: 5px dotted rgba(196, 165, 98, 0.7);
+    padding: 4% 0 5% 0
+}
+
+.bookings {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 30px;
+    position: relative;
+}
+
+.bookings h2 {
+    font-size: 2rem;
+    padding-left: 12%;
+    color: #c4a562
+}
+
+.bookings h2::before, .bookings h2::after {
+    display: inline-block;
+    content: '';
+    background-color: rgba(227, 218, 197, 0.7);
+    height: 2px;
+    width: 30%;
+    position: relative;
+    vertical-align: middle;
+}
+
+.bookings h2:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+.bookings h2:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.bookings p {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+.booking {
+    border: solid rgba(227, 218, 197, 0.5) 1px;
+    border-radius: 18px;
+    width: 50%;
+    box-shadow: 0 5px 10px rgba(227, 218, 197, 0.5);
+}
+
+.fa-heart {
+    font-size: 1rem;
+    border: none;
+    padding: 5px;
+    color: #c99728
+}
+
+.booking-cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    margin: 2%;
+}
+
+.booking h3 {
+    font-size: 1.4rem;
+}
+
+.booking h3::before, .booking h3::after {
+    content: '';
+    display: block;
+    width: 250%;
+    margin-left: -75%;
+    background-color: rgba(227, 218, 197, 0.5);
+    height: 2px
+}
+
+.cancelBtn {
+    width: 150px
+}
+
+.book-error {
+    color: red;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.modal {
+    position: absolute;
+    display: block;
+    width: 500px;
+    height: 300px;
+    left: 30%;
+    top: 30%;
+    background-color: white;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal div {
+    color: black
+}
+
+.modal div:first-child {
+    font-size: 1.3rem;
+}

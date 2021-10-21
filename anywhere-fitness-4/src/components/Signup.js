@@ -24,6 +24,7 @@ export default function Signup(props) {
 
     return (
         <div className="signup">
+            <h2>SIGN UP</h2>
             <form className="signup-input signup-form" onSubmit={onSubmit}>
                 <div className='signup-col signup-col-1'>
                     <label> Username:

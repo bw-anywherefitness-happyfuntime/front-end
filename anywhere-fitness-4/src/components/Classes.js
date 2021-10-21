@@ -76,7 +76,7 @@ export default function Classes(props) {
 
 
     // EFFECTS
-    
+
     useEffect(getClasses, [])
 
     // HELPER FUNCTIONS
@@ -166,18 +166,9 @@ export default function Classes(props) {
                     classData={classData}
                     deleteClass={deleteClass}
                     onChange={onChange}
-                    key={classData.class_id} />)}
+                    key={classData.class_id}
+                />)}
             </div>
         </div>
     )
 }
-
-
-//CLASSES schema
-
-//class_type
-//class_location
-//class_duration ->>>>>> number (in minutes)
-//class_date
-//class_time
-//intensity_level ->>>>>> number/10

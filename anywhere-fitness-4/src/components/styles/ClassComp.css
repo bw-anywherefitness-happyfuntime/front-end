@@ -11,6 +11,7 @@
     margin: 2%;
     border-radius: 25px;
     overflow: hidden;
+    height: 370px
 }
 
 .class-header h2, .class-header h3, .class-header h2 span {
@@ -36,7 +37,7 @@
 }
 
 .contents {
-    padding: 2%;
+    padding: 2% 2% 10% 2%;
 }
 
 .buttons {
@@ -86,4 +87,17 @@ form {
 
 .hide {
     display: none;
+}
+
+.buttonSwitch {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4%;
+}
+
+.contents {
+    line-height: 30px;
+    padding-left: 7%;
 }

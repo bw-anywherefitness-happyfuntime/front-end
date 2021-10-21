@@ -3,6 +3,7 @@
 @import '../src/components/styles/Home.css';
 @import '../src/components/styles/Classes.css';
 @import '../src/components/styles/ClassComp.css';
+@import '../src/components/styles/Bookings.css';
 #root {
     background-color: #1e1e1c;
 }

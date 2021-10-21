@@ -55,7 +55,7 @@ footer {
     align-items: center;
 }
 
-.fa {
+.fa-facebook, .fa-twitter, .fa-instagram, .fa-linkedin {
     width: 60px;
     height: 60px;
     font-size: 2rem;
@@ -68,7 +68,7 @@ footer {
     transition: 0.3s
 }
 
-.fa:hover {
+.fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-linkedin:hover {
     color: black;
     border: #c99728 solid 2px;
     background-color: #c99728;
