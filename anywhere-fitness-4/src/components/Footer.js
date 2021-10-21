@@ -50,7 +50,7 @@ export default function Footer() {
                             <a href="#top" className="fa fa-facebook"></a>
                             <a href="#top" className="fa fa-twitter"></a>
                             <a href="#top" className="fa fa-instagram"></a>
-                            <a href="#top" className="fa fa-twitter"></a>
+                            <a href="#top" className="fa fa-linkedin"></a>
                         </div>
                     </div>
                     <div className='footer-row footer-row-2'>

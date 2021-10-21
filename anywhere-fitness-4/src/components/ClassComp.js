@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 
 export default function Class(props) {
+    const role = localStorage.getItem('role')
     const { push } = useHistory()
     const { classData, deleteClass, currentUsername } = props;
     const initFormValues = {
@@ -14,6 +15,7 @@ export default function Class(props) {
         intensity_level: classData.intensity_level
     }
     const [formValues, setFormValues] = useState(initFormValues)
+    const [bookError, setBookError] = useState('')
 
     function deleteFunc() {
         deleteClass(classData.class_id);
@@ -63,17 +65,21 @@ export default function Class(props) {
 
     function bookClass(e) {
         e.preventDefault();
-        axios.post(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings`, { class_id: classData.class_id })
-            .then(res => {
-                console.log(res)
-                push('/bookings')
-            })
-            .catch(err => console.log({ err }))
+        if (!role) {
+            setBookError('You need to log in in order to book a class')
+        } else {
+            axios.post(`https://bw-fitness-4.herokuapp.com/api/users/${currentUsername}/bookings`, { class_id: classData.class_id })
+                .then(res => {
+                    console.log(res)
+                    push('/bookings')
+                })
+                .catch(err => setBookError(err.response.data.message))
+        }
     }
     const buttonSwitch = (window.localStorage.getItem('role') === '2') ? <div className='buttons'>
         <button onClick={editFunc}>Edit</button>
         <button onClick={deleteFunc}>Delete</button>
-    </div> : <button onClick={bookClass}>Book</button>
+    </div> : <button className='bookBtn' onClick={bookClass}>Book</button>
 
     return (
         <div className='card'>
@@ -82,18 +88,19 @@ export default function Class(props) {
                 <h3>{classData.class_date} @ {classData.class_time}</h3>
             </div>
             <div className='contents'>
-                <p>Where: {classData.class_location}</p>
-                <p>Duration: {classData.class_duration}</p>
+                <p>Location: {classData.class_location}</p>
+                <p>Duration: {classData.class_duration} minutes</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
-            {(window.localStorage.getItem('role')=== '2') && <div>Attendees:
-            <ul>
-                {classData.attendance.map(attendees=> <li>{attendees.username}</li>)}
-            </ul>
+            {(window.localStorage.getItem('role') === '2') && <div>Attendees:
+                <ul>
+                    {classData.attendance.map(attendees => <li>{attendees.username}</li>)}
+                </ul>
 
             </div>}
 
-            {buttonSwitch}
+            <div className='buttonSwitch'>{buttonSwitch}</div>
+            {bookError ? <div className='book-error'>{bookError}</div> : <div></div>}
 
             <form id='editForm' onSubmit={submit} className='hide'>
                 <div className='form-text'>
@@ -160,9 +167,3 @@ export default function Class(props) {
     )
 }
 
-//class_type
-//class_location
-//class_duration
-//class_date
-//class_time
-//intensity_level ->>>>>> number/10

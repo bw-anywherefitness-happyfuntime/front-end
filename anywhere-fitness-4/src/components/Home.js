@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom'
 
 export default function Home() {
     const { push } = useHistory()
+
+    console.log('home renders')
     return (
         <div className='home'>
 
