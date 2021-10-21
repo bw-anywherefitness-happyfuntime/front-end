@@ -87,6 +87,7 @@ function App() {
       .then(res => {
         window.localStorage.setItem('role', res.data.role_name)
         setCurrentUsername(res.data.username)
+        console.log(res.data)
         setLoginCallErrors('')
         push('/classes')
       }
@@ -105,6 +106,7 @@ function App() {
       .then(res => {
         setCurrentUsername(res.data.username)
         setSignupCallErrors('')
+        console.log(res.data)
         push('/login')
       })
       .catch(err => {

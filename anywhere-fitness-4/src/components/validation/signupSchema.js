@@ -12,7 +12,7 @@ const signupSchema = yup.object().shape({
         .min(6, 'password must be at least 6 characters')
         .required('please enter a password'),
     secret: yup.string(),
-    role: yup.string().oneOf(["instructor", "client"], "choose a role"),
+    role: yup.string().oneOf(["makemesuperman", "client"], "choose a role"),
 });
 
 export default signupSchema;

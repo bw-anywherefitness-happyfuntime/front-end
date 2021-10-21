@@ -76,7 +76,7 @@ export default function Class(props) {
                 .catch(err => setBookError(err.response.data.message))
         }
     }
-    const buttonSwitch = (window.localStorage.getItem('role') === '2') ? <div className='buttons'>
+    const buttonSwitch = (window.localStorage.getItem('role') === 'instructor') ? <div className='buttons'>
         <button onClick={editFunc}>Edit</button>
         <button onClick={deleteFunc}>Delete</button>
     </div> : <button className='bookBtn' onClick={bookClass}>Book</button>
@@ -92,7 +92,7 @@ export default function Class(props) {
                 <p>Duration: {classData.class_duration} minutes</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
-            {(window.localStorage.getItem('role') === '2') && <div>Attendees:
+            {(window.localStorage.getItem('role') === 'instructor') && <div>Attendees:
                 <ul>
                     {classData.attendance.map(attendees => <li>{attendees.username}</li>)}
                 </ul>

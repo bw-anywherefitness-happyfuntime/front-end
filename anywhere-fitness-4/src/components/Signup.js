@@ -50,6 +50,7 @@ export default function Signup(props) {
                 </div>
                 <div className='signup-col signup-col-3'>
                     <label> Secret Code:
+                        (enter if you are an instructor)
                         <br />
                         <input
                             value={values.secret}
@@ -65,7 +66,7 @@ export default function Signup(props) {
                         <select id="role-dropdown" disabled={role_disabled} value={values.role} name="role" onChange={onChange}>
                             <option value="">-- select a role --</option>
                             <option value="client">I am a Client.</option>
-                            <option value="instructor">I am an Instructor.</option>
+                            <option value="makemesuperman">I am an Instructor.</option>
                         </select>
                     </label>
                 </div>
