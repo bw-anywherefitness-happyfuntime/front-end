@@ -77,8 +77,8 @@ export default function Class(props) {
         }
     }
     const buttonSwitch = (window.localStorage.getItem('role') === 'instructor') ? <div className='buttons'>
-        <button onClick={editFunc}>Edit</button>
-        <button onClick={deleteFunc}>Delete</button>
+        <button className='classBtn' onClick={editFunc}>Edit</button>
+        <button className='classBtn' onClick={deleteFunc}>Delete</button>
     </div> : <button className='bookBtn' onClick={bookClass}>Book</button>
 
     return (
@@ -92,7 +92,7 @@ export default function Class(props) {
                 <p>Duration: {classData.class_duration} minutes</p>
                 <p>Intensity: {classData.intensity_level}/10</p>
             </div>
-            {(window.localStorage.getItem('role') === 'instructor') && <div>Attendees:
+            {(window.localStorage.getItem('role') === 'instructor') && <div className='attendees'>Attendees:
                 <ul>
                     {classData.attendance.map(attendees => <li>{attendees.username}</li>)}
                 </ul>

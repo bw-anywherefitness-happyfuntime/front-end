@@ -11,7 +11,7 @@
     margin: 2%;
     border-radius: 25px;
     overflow: hidden;
-    height: 370px
+    /* height: 700px */
 }
 
 .class-header h2, .class-header h3, .class-header h2 span {
@@ -100,4 +100,14 @@ form {
 .contents {
     line-height: 30px;
     padding-left: 7%;
+}
+
+.classBtn {
+    width: 100px;
+    color: white
+}
+
+.attendees {
+    padding-left: 10%;
+    line-height: 30px;
 }
